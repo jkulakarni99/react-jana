@@ -1,0 +1,32 @@
+{
+  "name": "react_jana",
+  "version": "1.0.0",
+  "description": "React Project by JANA",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "just"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://jkulakarni99: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@github.com/jkulakarni99/react-jana.git"
+  },
+  "keywords": [],
+  "author": "Janardhana K",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jkulakarni99/react-jana/issues"
+  },
+  "homepage": "https://github.com/jkulakarni99/react-jana#readme",
+  "devDependencies": {
+    "parcel": "^2.11.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    "last 5 versions"
+  ]
+}
