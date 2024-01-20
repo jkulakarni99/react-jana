@@ -17,3 +17,35 @@
 - way to host in HTTPs
 - Tree shaking - remove unused code 
 - Different dev and prod bundler  
+
+
+
+# React Hooks
+React will make DOM operation super fast, when state var changes the DOM will re-render immediately. It is good at DOM manipulation
+
+State variable, state means keyword 
+If we declare state varibale in one component then it related to that component only as simple as local scope to that particulat react component 
+
+Hooks are Normal JS utility function
+2 imp hook,
+-useState()
+  -- const [listOfRes, setListOfRes] = useState(resList); 
+     OR
+     arr = useState9resList;
+     with arr we can do listOfRes = arr[0] then setListOfRes = arr[1]
+     OR
+     const [lisrOfArr, setListOfArr] = arr;
+    it's all about simple array destricturing, basically useState() return arr 
+  
+-useEffect()
+
+whenever state variable changes react re-render the DOM
+
+Virtual DOM: It is representaion of Actual DOM and Actual DOM is nothing but all tags exmaple div, div inside div and imag tag etc etc
+Also Virtual DOM is like JS representation of HTML as same as JSX => React.createELement => React Element => finall JS object 
+
+Reconciliation ALgorithm (React Fiber): It consist of Virtual DOM, Diff Algorth. It came in React 16.
+
+Diff Algorith: It tries to find the different between old virtual dom and new virtual dom and then it actually updates the DOM on every render cycle
+
+React is efficiant DOM manipulator bcz it has virtual DOM and used Diff Algorithm
