@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid #333;
+    border-radius: 10px;
+  }
+  .logo {
+    width: 100px;
+    height: 80px;
+  }
+  .menu > ul {
+    display: flex;
+    list-style-type: none;
+  }
+  .menu > ul > li {
+    padding: 10px;
+    margin: 10px;
+  }
