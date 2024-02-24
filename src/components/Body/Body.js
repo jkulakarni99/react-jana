@@ -6,6 +6,7 @@ import { useEffect } from "react";
 const Body = () => {
   // State variable - Super powerfull variable
   const [listOfRes, setListOfRes] = useState([]);
+  const [btnName, setBtnName] = useState('Top reated Resturants');
 
   const fetchData = async () => {
     const data = await fetch(
@@ -30,17 +31,18 @@ const Body = () => {
     <SkeletionLoad />
   ) : (
     <div className="body-wrapper">
-      {/* <div className="filter" style={{ margin: "1rem 2rem 0 1.3rem" }}>
+      <div className="filter" style={{ margin: "1rem 2rem 0 1.3rem" }}>
         <button
           className="filter-btn"
           onClick={() => {
-            const filteredData = listOfRes.filter((ele) => ele?.data?.star > 4);
-            setListOfRes(filteredData);
+            btnName.includes('Top') ? setBtnName('Clear') :setBtnName('Top rated Rest')
+            const filteredData = listOfRes.filter((ele) => ele?.info?.avgRatingString > 4.3);
+            if (btnName.includes('Top')) setListOfRes(filteredData);
           }}
         >
-          Top Rated Resturant
+          {btnName}
         </button>
-      </div> */}
+      </div>
       <div>
         <ResContainer cardList={listOfRes} />
       </div>

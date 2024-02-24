@@ -1,0 +1,31 @@
+import { createBrowserRouter } from "react-router-dom"
+import About from "../components/About/About"
+import AppLayout from "../Layout/Layout";
+import Body from "../components/Body/Body";
+import ContactUs from "../components/Contact/ContactUs"
+import ParticularRest from "../components/ParticularResturant/ParticularResturant";
+const routes = createBrowserRouter([
+    {
+        path: '/',
+        element: <AppLayout />,
+        children: [
+            {
+                path: '/',
+                element: <Body />
+            },
+            {
+                path: '/about',
+                element: <About />
+            },
+            {
+                path: '/contact-us',
+                element: <ContactUs />
+            },
+            {
+                path: '/resturant/:restId',
+                element: <ParticularRest />
+            }
+        ]
+    },
+]);
+export default routes;

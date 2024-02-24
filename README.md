@@ -49,3 +49,8 @@ Reconciliation ALgorithm (React Fiber): It consist of Virtual DOM, Diff Algorth.
 Diff Algorith: It tries to find the different between old virtual dom and new virtual dom and then it actually updates the DOM on every render cycle
 
 React is efficiant DOM manipulator bcz it has virtual DOM and used Diff Algorithm
+
+
+
+# Routing
+Client Side Routing (Page navigation will be done before doing api call and then call on page load ) & Server Side Routing (Example: anchor tag call to api get the data then show it in the UI )

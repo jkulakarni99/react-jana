@@ -1,8 +1,9 @@
 import { FOOD_IMG } from "../../utils/constants";
+import "./ResCard.css"
 const ResturantCard = (prop) => {
   const { restDetails } = prop;
   console.log(restDetails?.info)
-  const { name, cuisines, locality, avgRatingString, costForTwo, cloudinaryImageId } = restDetails?.info;
+  const { name, cuisines, locality, avgRatingString, costForTwo, cloudinaryImageId, id } = restDetails?.info;
   return (
     <div className="card-wrapper" style={{ backgroundColor: "#f0f0f0" }}>
       <img className="rest-img" src={`${FOOD_IMG}${cloudinaryImageId}`} />
