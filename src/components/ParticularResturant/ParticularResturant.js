@@ -37,7 +37,7 @@ const ParticularRest = () => {
       <h4>{cuisines.join(", ")}</h4>
       <h4>{areaName}</h4>
 
-      <h3>{category} Pizza are listed below</h3>
+      <h3>{category}</h3>
       <ul>
         {itemCards.map((ele) => (
           <li key={ele.card.info.id}>{ele.card.info.name} - Rs.{ele.card.info.defaultPrice || ele.card.info.price/100}</li>

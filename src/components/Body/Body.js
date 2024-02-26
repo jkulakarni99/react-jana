@@ -7,7 +7,7 @@ const Body = () => {
   // State variable - Super powerfull variable
   const [listOfRes, setListOfRes] = useState([]);
   const [btnName, setBtnName] = useState('Top reated Resturants');
-
+  const [tempListOfRes, settempListOfRes] = useState([]);
   const fetchData = async () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9981732&lng=77.55304459999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
@@ -19,6 +19,8 @@ const Body = () => {
       resInfo?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
+    settempListOfRes(resInfo?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+      ?.restaurants)
     console.log(listOfRes);
   };
 
@@ -26,6 +28,16 @@ const Body = () => {
     fetchData();
   }, []);
   console.log("before userEffect");
+
+  function filterTopRated(val) {
+    if (val.includes('Clear')) {
+      setListOfRes(tempListOfRes);
+    }
+    else {
+      const filteredData = listOfRes.filter((ele) => ele?.info?.avgRatingString > 4.3);
+      setListOfRes(filteredData);
+    }
+  }
 
   return listOfRes.length === 0 ? (
     <SkeletionLoad />
@@ -35,9 +47,8 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
-            btnName.includes('Top') ? setBtnName('Clear') :setBtnName('Top rated Rest')
-            const filteredData = listOfRes.filter((ele) => ele?.info?.avgRatingString > 4.3);
-            if (btnName.includes('Top')) setListOfRes(filteredData);
+            btnName.includes('Top') ? setBtnName('Clear') : setBtnName('Top rated Rest')
+            filterTopRated(btnName)
           }}
         >
           {btnName}

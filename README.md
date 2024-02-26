@@ -54,3 +54,9 @@ React is efficiant DOM manipulator bcz it has virtual DOM and used Diff Algorith
 
 # Routing
 Client Side Routing (Page navigation will be done before doing api call and then call on page load ) & Server Side Routing (Example: anchor tag call to api get the data then show it in the UI )
+
+
+# class based
+1st constryctor will be called then render method then componentDidMount called this is lifecycle hook of class based
+2 phase RENDER PHASE and COMMIT PHASE
+1st react will btach the render phase and then move to COMMIT Phase 

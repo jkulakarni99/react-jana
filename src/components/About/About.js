@@ -1,8 +1,9 @@
-const About = () => {
+import UserClass from "../UserClass/UserClass";
+const AboutPage = () => {
   return (
     <div>
-      <h2>This is about</h2>
+      <UserClass />
     </div>
-  );
-};
-export default About;
+  )
+}
+export default AboutPage
