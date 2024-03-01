@@ -12,8 +12,9 @@ class UserClass extends React.Component {
             login: '',
             bio: '',
         },
-        count: 0
+        count: 0,
       }
+      this.updateCountOnbtnClick = this.updateCount.bind(this);
 
     }
     async componentDidMount() {
@@ -33,30 +34,30 @@ class UserClass extends React.Component {
     componentWillUnmount() {
         console.log('destory')
     }
+    updateCount() {
+      console.log('called update count', this);
+      this.setState(val => {
+        const tempDetails = Object.assign({}, val.userDetails);
+        tempDetails.name = 'Dummy';
+        return {userDetails: tempDetails}
+      })
+      this.setState({
+        count: this.state.count + 1
+      })
+    }
     render() {
         const {name, location, login, bio} = this.state.userDetails;
         console.log('redner')
       return (
         <div>
-          <h1>This is about page </h1>
+          <h1>This is about page {this.state.count +1}</h1>
           <div className="aboutCard">
           <h4>Name: {name}</h4>
           <h5>Location: {location}</h5>
           <h6>UserName: {login}</h6>
           <h6>Bio: {bio}</h6>
           </div>
-          <button onClick={() => {
-            this.setState(val => {
-                console.log(val);
-                const userDetails = Object.assign({}, val.userDetails)
-                userDetails.name = 'dummy';
-                return {userDetails}
-            })
-            setTimeout(() => {
-                console.log(this.state.userDetails)
-
-            }, 5000)
-          }}>Click me</button>
+          <button onClick={this.updateCountOnbtnClick}>Click me</button>
         </div>
       )
     }

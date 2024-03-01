@@ -1,55 +1,36 @@
-import ResturantCard from "../RestCards/ResturantCard";
 import ResContainer from "../ResContainer/ResContainer";
 import SkeletionLoad from "../SkeletonLoader/SkeletonLoad";
 import { useState } from "react";
-import { useEffect } from "react";
+import { useRestList } from "../../utils/useReslist";
 const Body = () => {
   // State variable - Super powerfull variable
-  const [listOfRes, setListOfRes] = useState([]);
   const [btnName, setBtnName] = useState('Top reated Resturants');
-  const [tempListOfRes, settempListOfRes] = useState([]);
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9981732&lng=77.55304459999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-    const resInfo = await data.json();
-    console.log(resInfo);
-    console.log("bypassed awaut");
-    setListOfRes(
-      resInfo?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
-    settempListOfRes(resInfo?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-      ?.restaurants)
-    console.log(listOfRes);
-  };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-  console.log("before userEffect");
+  let {listOfRes, tempListOfRes, editList} = useRestList();
 
   function filterTopRated(val) {
     if (val.includes('Clear')) {
-      setListOfRes(tempListOfRes);
+      editList(tempListOfRes);
     }
     else {
-      const filteredData = listOfRes.filter((ele) => ele?.info?.avgRatingString > 4.3);
-      setListOfRes(filteredData);
+      // const filteredData = listOfRes.filter((ele) => ele?.info?.avgRatingString > 4.3);
+      listOfRes = listOfRes.filter(ele => ele?.info?.avgRatingString > 4.3);
+      editList(listOfRes)
     }
   }
 
+  function onClickTop() {
+    btnName.includes('Top') ? setBtnName('Clear') : setBtnName('Top reated Resturants');
+    filterTopRated(btnName)
+  }
   return listOfRes.length === 0 ? (
     <SkeletionLoad />
   ) : (
     <div className="body-wrapper">
       <div className="filter" style={{ margin: "1rem 2rem 0 1.3rem" }}>
         <button
-          className="filter-btn"
-          onClick={() => {
-            btnName.includes('Top') ? setBtnName('Clear') : setBtnName('Top rated Rest')
-            filterTopRated(btnName)
-          }}
+          className="border-4 p-2"
+          onClick={onClickTop}
         >
           {btnName}
         </button>

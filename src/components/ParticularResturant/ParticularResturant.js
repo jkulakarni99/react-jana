@@ -1,49 +1,35 @@
-import { useState, useEffect } from "react";
-import { RESTU_API } from "../../utils/constants";
 import SkeletionLoad from "../SkeletonLoader/SkeletonLoad";
 import { useParams } from "react-router-dom";
+import { useRestData } from "../../utils/useRestData";
+import { useState } from "react";
+import { ParticularContext } from "./ParticularContext";
+import Category from "./Category";
 
 const ParticularRest = () => {
 
-  let [resDetails, setResDetails] = useState(null);
-
+  const [showIndex, setShowIndex] = useState(0)
   const {restId} = useParams();
-  
-  async function getDetailsOfRest() {
-    const data = await fetch(`${RESTU_API}${restId}`);
-    const json = await data.json();
-    console.log(json.data);
-    setResDetails(json.data);
-  }
+  const resDetails = useRestData(restId);
 
-  useEffect(() => {
-    getDetailsOfRest();
-  }, []);
+  console.warn('data', resDetails);
 
-  if (resDetails === null) return <SkeletionLoad />;
+  if (resDetails === undefined || resDetails === null) return <SkeletionLoad />;
 
-  const resName = resDetails?.cards[0]?.card.card?.text;
-  const { cuisines, areaName } = resDetails?.cards[2]?.card?.card.info;
-  const category =
-    resDetails?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-      ?.card.title;
-  const { itemCards } =
-    resDetails?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-      ?.card;
+  const resName = resDetails?.cards[0]?.card.card?.info.name;
+  const { cuisines, areaName } = resDetails?.cards[0]?.card?.card.info;
+  const categoryListAndData = resDetails?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(ele => ele?.card?.card['@type'].includes('ItemCategory'));
+  console.warn(categoryListAndData);
 
   return (
+    <ParticularContext.Provider value={'aditya'}>
     <div>
-      <h2>{resName}</h2>
-      <h4>{cuisines.join(", ")}</h4>
-      <h4>{areaName}</h4>
-
-      <h3>{category}</h3>
-      <ul>
-        {itemCards.map((ele) => (
-          <li key={ele.card.info.id}>{ele.card.info.name} - Rs.{ele.card.info.defaultPrice || ele.card.info.price/100}</li>
-        ))}
-      </ul>
+      <h1 className="flex justify-center mt-4">{resName}</h1>
+      <h4 className="flex justify-center">{cuisines.join(", ")}</h4>
+      <h4 className="flex justify-center">{areaName}</h4>
+      {categoryListAndData.map((ele, index) => <Category key={ele.card.card.title} values={ele.card.card}
+      showList={index === showIndex ? true : false} setIndexMethod={() => setShowIndex(index === showIndex ? null : index )}/> )}
     </div>
+    </ParticularContext.Provider>
   );
 };
 export default ParticularRest;
