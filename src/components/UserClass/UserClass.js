@@ -38,19 +38,19 @@ class UserClass extends React.Component {
       console.log('called update count', this);
       this.setState(val => {
         const tempDetails = Object.assign({}, val.userDetails);
-        tempDetails.name = 'Dummy';
         return {userDetails: tempDetails}
       })
-      this.setState({
-        count: this.state.count + 1
-      })
+      console.log('here is the state', this.state);
+      // this.setState({
+      //   count: 10000
+      // })
     }
     render() {
         const {name, location, login, bio} = this.state.userDetails;
         console.log('redner')
       return (
         <div>
-          <h1>This is about page {this.state.count +1}</h1>
+          <h1>This is about page {this.state.count}</h1>
           <div className="aboutCard">
           <h4>Name: {name}</h4>
           <h5>Location: {location}</h5>
