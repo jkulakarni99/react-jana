@@ -14,11 +14,12 @@ const cartStore = createSlice({
       const newArr = state.items.filter((ele) => {
         if (ele?.card?.info?.id !== action.payload?.card?.info?.id) return ele;
       });
-    //   state.items = newArr
-    return {...state, items: newArr}
+      state.items = newArr
+    // return {...state, items: newArr}
     },
     clearCart: (state) => {
-        return {...state, items: []}
+      state.items.length = 0;
+      // return {...state, items: []}
     },
   },
 });

@@ -1,2 +1,2 @@
 import { createContext } from "react";
-export const ParticularContext = createContext('aditya')
+export const ParticularContext = createContext(null)

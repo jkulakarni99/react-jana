@@ -16,10 +16,11 @@ const ParticularRest = () => {
 
   if (resDetails === undefined || resDetails === null) return <SkeletionLoad />;
 
-  const resName = resDetails?.cards[0]?.card.card?.info.name;
-  const { cuisines, areaName } = resDetails?.cards[0]?.card?.card.info;
+  console.warn("data121212", resDetails);
+  const resName = resDetails?.cards[2]?.card.card?.info.name;
+  const { cuisines, areaName } = resDetails?.cards[2]?.card?.card.info;
   const categoryListAndData =
-    resDetails?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+    resDetails?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
       (ele) => ele?.card?.card["@type"].includes("ItemCategory")
     );
   console.warn(categoryListAndData);
